@@ -11,7 +11,13 @@
 
 </head>
 <body>
-<!--抽取公共模块-->
 <div th:replace="~{commons/topBar::topBar}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- 如果是大屏幕9 3 分，中小屏幕水平排列       -->
+        <div class="col-lg-9 col-md-12 col-sm-12" style="background-color: #5bc0de"></div>
+        <div class="col-lg-3 col-md-12 col-sm-12" style="background-color: red"></div>
+    </div>
+</div>
 </body>
 </html>
