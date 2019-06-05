@@ -5,3 +5,6 @@ spring:
   url: jdbc:mysql://localhost:3306/community?serverTimezone=GMT&useSSL=FALSE
   username: root
   password: wrial.qq.com
+# 按ctrl + f9
+ thymeleaf:
+  cache: false

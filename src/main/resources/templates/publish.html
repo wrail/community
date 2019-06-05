@@ -8,6 +8,7 @@
     <!--    <script src="js/bootstrap.min.js"></script>-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
 
 </head>
 <body>
@@ -15,9 +16,60 @@
 <div class="container-fluid">
     <div class="row">
         <!-- 如果是大屏幕9 3 分，中小屏幕水平排列       -->
-        <div class="col-lg-9 col-md-12 col-sm-12" style="background-color: #5bc0de"></div>
-        <div class="col-lg-3 col-md-12 col-sm-12" style="background-color: red"></div>
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">发起问题</span></h2>
+
+            <form action="/publish" method="post">
+                <input type="hidden" name="id">
+                <div class="form-group">
+                    <label for="title">问题标题:</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                           placeholder="问题标题……">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题补充 (必填，请参照右侧提示):</label>
+                    <textarea name="description" id="description" class="form-control"
+                              cols="30"
+                              rows="10"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tag">添加标签:</label>
+                    <input type="text" class="form-control" id="tag" name="tag"
+                           placeholder="输入标签，以逗号号分隔">
+                </div>
+
+                <div class="container-fluid main ">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                 th:text="${error}"
+                                 th:if="${error != null}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="btn btn-success btn-publish ">
+                                发布
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12" style="background-color: #5bc0de">
+            <h3>问题发起指南</h3>
+            • 发言内容: 发言内容要是技术方向，禁止互相言语侮辱 <br>
+            <hr>
+            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>
+            <hr>
+            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料<br>
+            <hr>
+            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
+            <hr>
+
+        </div>
     </div>
+
 </div>
 </body>
 </html>
