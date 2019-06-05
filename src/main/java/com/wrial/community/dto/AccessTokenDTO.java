@@ -1,4 +1,4 @@
-package com.wrial.community.community.dto;
+package com.wrial.community.dto;
 
 import lombok.Data;
 

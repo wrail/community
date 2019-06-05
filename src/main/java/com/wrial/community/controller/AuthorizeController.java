@@ -1,12 +1,11 @@
-package com.wrial.community.community.controller;
+package com.wrial.community.controller;
 
 
-import com.sun.deploy.net.HttpResponse;
-import com.wrial.community.community.dto.AccessTokenDTO;
-import com.wrial.community.community.dto.GitHubUser;
-import com.wrial.community.community.mapper.UserMapper;
-import com.wrial.community.community.model.User;
-import com.wrial.community.community.provider.GitHubProvider;
+import com.wrial.community.dto.AccessTokenDTO;
+import com.wrial.community.dto.GitHubUser;
+import com.wrial.community.mapper.UserMapper;
+import com.wrial.community.model.User;
+import com.wrial.community.provider.GitHubProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,9 +52,10 @@ public class AuthorizeController {
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
         //不管登陆是否成功都要返回到首页,使用重定向
-        if (gitHubUser != null) {
+        //可能会存在github密钥不在，可以从token获取到用户对象，但不能获取信息
+        if (gitHubUser != null && gitHubUser.getId()!=null) {
             //因为采用了token机制就不需要session了
-            //request.getSession().setAttribute("gitHubUser", gitHubUser);
+//            request.getSession().setAttribute("gitHubUser", gitHubUser);
             User user = new User();
             //生成一个随机的UUID存在数据库
             String token = UUID.randomUUID().toString();
@@ -64,11 +64,11 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(gitHubUser.getName());
             user.setAccountId(String.valueOf(gitHubUser.getId()));
+            user.setAvatarUrl(gitHubUser.getAvatar_url());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(System.currentTimeMillis());
 
             userMapper.insert(user);
-
 
             log.info("打印出从github拿的user信息{}", gitHubUser);
             //redirect不能直接加页面不然会404，直接到根目录就自动进入首页了

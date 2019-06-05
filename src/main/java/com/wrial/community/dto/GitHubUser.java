@@ -1,4 +1,4 @@
-package com.wrial.community.community.dto;
+package com.wrial.community.dto;
 
 import lombok.Data;
 
@@ -7,5 +7,7 @@ public class GitHubUser {
     private String name;
     private Long id;
     private String bio;
+    //GitHub头像地址
+    private String avatar_url;
 
 }

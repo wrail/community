@@ -3,10 +3,13 @@ body {
 }
 
 .main {
-    background-color: honeydew;
+    /*background-color: honeydew;*/
     margin: 30px;
 }
-
+.pic {
+    height: 50px;
+    width: 50px;
+}
 .btn-publish {
     float: right;
     margin-bottom: 15px;
@@ -24,7 +27,7 @@ body {
 .text-desc {
     font-size: 12px;
     font-weight: normal;
-    color: #999;
+    color: #8249fa;
 }
 
 .profile .section {

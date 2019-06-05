@@ -1,4 +1,4 @@
-package com.wrial.community.community;
+package com.wrial.community;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

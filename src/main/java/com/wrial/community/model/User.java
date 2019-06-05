@@ -1,4 +1,4 @@
-package com.wrial.community.community.model;
+package com.wrial.community.model;
 
 import lombok.Data;
 
@@ -11,6 +11,8 @@ public class User {
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
+    //图片地址
+    private String avatarUrl;
 
 
 }

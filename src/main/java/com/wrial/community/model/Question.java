@@ -1,4 +1,4 @@
-package com.wrial.community.community.model;
+package com.wrial.community.model;
 
 import lombok.Data;
 

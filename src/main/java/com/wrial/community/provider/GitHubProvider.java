@@ -1,9 +1,9 @@
-package com.wrial.community.community.provider;
+package com.wrial.community.provider;
 
 
 import com.alibaba.fastjson.JSON;
-import com.wrial.community.community.dto.AccessTokenDTO;
-import com.wrial.community.community.dto.GitHubUser;
+import com.wrial.community.dto.AccessTokenDTO;
+import com.wrial.community.dto.GitHubUser;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
