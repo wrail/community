@@ -10,11 +10,11 @@ public class Question {
     private Long gmtModified;
     //创建者
     private Long creator;
-    private Integer commentCount;
+    private Integer commentCount = 0;
     //浏览数
-    private Integer viewCount;
+    private Integer viewCount = 0;
     //点赞数
-    private Integer likeCount;
+    private Integer likeCount = 0;
     //标签
     private String tag;
 

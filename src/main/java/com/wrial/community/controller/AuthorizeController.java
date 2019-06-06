@@ -70,7 +70,7 @@ public class AuthorizeController {
 
             userMapper.insert(user);
 
-            log.info("打印出从github拿的user信息{}", gitHubUser);
+            log.info("github拿的user信息{}", gitHubUser);
             //redirect不能直接加页面不然会404，直接到根目录就自动进入首页了
             return "redirect:/";
         } else {
