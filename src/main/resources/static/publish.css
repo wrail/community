@@ -1,10 +1,14 @@
 body {
-    background-color: #ffe2fe;
+ /*background-image: url("https://dimg02.c-ctrip.com/images/fd/tg/g2/M03/8C/84/CghzgFWw7nWAe_F9ACMX08fvbjk771_R_1600_10000_Mtg_7.jpg");*/
+ background-image: url("https://dimg01.c-ctrip.com/images/fd/tg/g1/M00/1C/19/CghzfVWsywyADWSYABUyMyKKvsI939_R_1600_10000_Mtg_7.jpg");
 }
 
 .main {
     /*background-color: honeydew;*/
     margin: 30px;
+}
+.top{
+    background: #2aabd2;
 }
 .pic {
     height: 40px;

@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <!--抽取公共模块-->
@@ -51,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a th:href="@{/(page = ${pagination.page-1})}" aria-label="Next"
+                    <a th:href="@{/(page = ${pagination.page+1})}" aria-label="Next"
                        th:if="${pagination.showNext}">
                         <span aria-hidden="true">&gt;</span>
                     </a>

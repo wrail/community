@@ -5,7 +5,6 @@ import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.Question;
 import com.wrial.community.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -62,22 +60,6 @@ public class PublishController {
             model.addAttribute("info", "用户未登录");
             return "publish";
         }
-
-        //判断user登陆没有
-//        Cookie[] cookies = request.getCookies();
-//        for (int i = 0; i < cookies.length; i++) {
-//            if (cookies[i].getName().equals("token")) {
-//                String token = cookies[i].getValue();
-//                user = userMapper.selectByToken(token);
-//                break;
-//            }
-//        }
-        //如果user是空，就让去登陆
-//        if (user == null) {
-//            model.addAttribute("info", "未登录");
-//            return "redirect:/";
-//        }
-
         Question question = new Question();
         question.setTag(tag);
         question.setTitle(title);
@@ -85,7 +67,7 @@ public class PublishController {
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(System.currentTimeMillis());
         //问题的发起者
-        question.setCreator(user.getId());
+        question.setCreator(Long.valueOf(user.getId()));
         questionMapper.insert(question);
         model.addAttribute(user);
         model.addAttribute("info", "发布成功！");

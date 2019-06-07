@@ -7,6 +7,7 @@ import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.User;
 import com.wrial.community.provider.GitHubProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -56,19 +57,28 @@ public class AuthorizeController {
         if (gitHubUser != null && gitHubUser.getId()!=null) {
             //因为采用了token机制就不需要session了
 //            request.getSession().setAttribute("gitHubUser", gitHubUser);
-            User user = new User();
-            //生成一个随机的UUID存在数据库
-            String token = UUID.randomUUID().toString();
-            //将token放在Cookie里
-            response.addCookie(new Cookie("token", token));
-            user.setToken(token);
-            user.setName(gitHubUser.getName());
-            user.setAccountId(String.valueOf(gitHubUser.getId()));
-            user.setAvatarUrl(gitHubUser.getAvatar_url());
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(System.currentTimeMillis());
 
-            userMapper.insert(user);
+            String selectByAccountToken = userMapper.selectByAccount(String.valueOf(gitHubUser.getId()));
+
+            if (Strings.isEmpty(selectByAccountToken)){
+
+                User user = new User();
+                //生成一个随机的UUID存在数据库
+
+                String token = UUID.randomUUID().toString();
+                //将token放在Cookie里
+                response.addCookie(new Cookie("token", token));
+                user.setToken(token);
+                user.setName(gitHubUser.getName());
+                user.setAccountId(String.valueOf(gitHubUser.getId()));
+                user.setAvatarUrl(gitHubUser.getAvatar_url());
+                user.setGmtCreate(System.currentTimeMillis());
+                user.setGmtModified(System.currentTimeMillis());
+                userMapper.insert(user);
+
+            }else {
+                response.addCookie(new Cookie("token",selectByAccountToken));
+            }
 
             log.info("github拿的user信息{}", gitHubUser);
             //redirect不能直接加页面不然会404，直接到根目录就自动进入首页了
