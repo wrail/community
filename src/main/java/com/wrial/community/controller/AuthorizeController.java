@@ -1,6 +1,7 @@
 package com.wrial.community.controller;
 
 
+import com.sun.deploy.net.HttpResponse;
 import com.wrial.community.dto.AccessTokenDTO;
 import com.wrial.community.dto.GitHubUser;
 import com.wrial.community.mapper.UserMapper;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
@@ -54,13 +56,13 @@ public class AuthorizeController {
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
         //不管登陆是否成功都要返回到首页,使用重定向
         //可能会存在github密钥不在，可以从token获取到用户对象，但不能获取信息
-        if (gitHubUser != null && gitHubUser.getId()!=null) {
+        if (gitHubUser != null && gitHubUser.getId() != null) {
             //因为采用了token机制就不需要session了
 //            request.getSession().setAttribute("gitHubUser", gitHubUser);
 
             String selectByAccountToken = userMapper.selectByAccount(String.valueOf(gitHubUser.getId()));
 
-            if (Strings.isEmpty(selectByAccountToken)){
+            if (Strings.isEmpty(selectByAccountToken)) {
 
                 User user = new User();
                 //生成一个随机的UUID存在数据库
@@ -76,8 +78,8 @@ public class AuthorizeController {
                 user.setGmtModified(System.currentTimeMillis());
                 userMapper.insert(user);
 
-            }else {
-                response.addCookie(new Cookie("token",selectByAccountToken));
+            } else {
+                response.addCookie(new Cookie("token", selectByAccountToken));
             }
 
             log.info("github拿的user信息{}", gitHubUser);
@@ -87,6 +89,17 @@ public class AuthorizeController {
             return "redirect:/";
 
         }
+    }
+
+    @GetMapping("/logout")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+
+        request.getSession().removeAttribute("user");
+        //删除cookie方法就是同名，并且设置最长时间为0
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }

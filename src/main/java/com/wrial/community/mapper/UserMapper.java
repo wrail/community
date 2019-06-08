@@ -22,6 +22,9 @@ public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User> {
     @Select("select token from user where account_Id = #{accountId}")
     String selectByAccount(String accountId);
 
+    @Select("select * from user where account_id = #{accountId}")
+    User selectByCreator(Long accountId);
+
 
 
 }

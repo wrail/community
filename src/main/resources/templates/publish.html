@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
-    <!--    <link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
-    <!--    <script src="js/bootstrap.min.js"></script>-->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -20,7 +20,7 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">发起问题</span></h2>
 
             <form action="/publish" method="post">
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题:</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${title}"

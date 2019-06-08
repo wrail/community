@@ -63,7 +63,7 @@ public class QuestionService {
         if (offset < 0) {
             offset = 0;
         }
-        List<Question> questions = questionMapper.listByUser(userId,offset, size);
+        List<Question> questions = questionMapper.listByUser(userId, offset, size);
         for (Question question : questions) {
             User user = userMapper.selectById(question.getCreator());
             QuestionDTO dto = new QuestionDTO();
@@ -78,5 +78,36 @@ public class QuestionService {
         paginationDTO.setPagination(totalCount, page, size);
 
         return paginationDTO;
+    }
+
+
+    public QuestionDTO getById(Integer id) {
+
+        QuestionDTO questionDTO = new QuestionDTO();
+        Question question = questionMapper.selectById(id);
+        BeanUtils.copyProperties(question, questionDTO);
+        User user = userMapper.selectById(question.getCreator());
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
+    //进行插入或更新操作
+    public void insertOrUpdate(Question question) {
+
+        if (question.getId()==null){
+            Long id = question.getId();
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.insert(question);
+        }else {
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
+
+    }
+
+    public Question selectById(Integer id) {
+
+        return questionMapper.selectById(id);
     }
 }
