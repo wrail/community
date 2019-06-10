@@ -29,7 +29,6 @@ public class IndexController {
         //在返回首页之前将我们所有问题展示,使用QuestionDTO包装,加上分页功能，进化为PaginationDTO
         PaginationDTO pagination = questionService.selectByPage(page,size);
         model.addAttribute("pagination",pagination);
-
         return "index";
     }
 

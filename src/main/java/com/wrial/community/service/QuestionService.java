@@ -11,6 +11,7 @@ import com.wrial.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class QuestionService {
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.selectById(id);
         if (question == null) {
-         throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.selectById(question.getCreator());
@@ -104,7 +105,7 @@ public class QuestionService {
         } else {
             question.setGmtModified(System.currentTimeMillis());
             int i = questionMapper.update(question);
-            if (i!=1){
+            if (i != 1) {
                 throw new CustomizeException(CustomizeErrorCode.UPDATE_NOT_ALLOWED);
             }
         }
@@ -112,7 +113,12 @@ public class QuestionService {
     }
 
     public Question selectById(Integer id) {
-
         return questionMapper.selectById(id);
+    }
+
+    //自增阅读数,细节：在更新的时候使用view_count=view_count+1，不要使用Example中的比较并+1
+    public void autoIncrViewNum(Integer id) {
+        questionMapper.autoIncView(id);
+
     }
 }
