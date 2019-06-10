@@ -11,8 +11,9 @@ body {
     background: #2aabd2;
 }
 .pic {
-    height: 40px;
-    width: 40px;
+
+    height: 55px;
+    width: 55px;
 }
 .btn-publish {
     float: right;

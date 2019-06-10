@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import tk.mybatis.mapper.entity.Example;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -42,6 +44,7 @@ public class PublishController {
     public String publish() {
         return "publish";
     }
+
 
     //在发布之前，先要判断是否登陆（根据数据库的token和cookie），并且user不为空
     @PostMapping("/publish")

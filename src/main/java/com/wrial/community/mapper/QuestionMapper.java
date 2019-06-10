@@ -29,6 +29,6 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
     @Select("select count(1) from question where creator = #{id}")
     Integer countById(Long id);
     @Update("update question set title = #{title},description = #{description},gmt_modified = #{gmtModified},tag = #{tag} where id = #{id}")
-    void update(Question question);
+    int update(Question question);
 
 }

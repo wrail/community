@@ -1,7 +1,5 @@
 package com.wrial.community.controller;
 
-
-import com.sun.deploy.net.HttpResponse;
 import com.wrial.community.dto.AccessTokenDTO;
 import com.wrial.community.dto.GitHubUser;
 import com.wrial.community.mapper.UserMapper;

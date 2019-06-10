@@ -2,6 +2,8 @@ package com.wrial.community.service;
 
 import com.wrial.community.dto.PaginationDTO;
 import com.wrial.community.dto.QuestionDTO;
+import com.wrial.community.exception.CustomizeErrorCode;
+import com.wrial.community.exception.CustomizeException;
 import com.wrial.community.mapper.QuestionMapper;
 import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.Question;
@@ -37,7 +39,6 @@ public class QuestionService {
         List<Question> questions = questionMapper.selectPage(offset, size);
 //        List<Question> questions = questionMapper.selectAll();
         for (Question question : questions) {
-//            User user = userMapper.selectByPrimaryKey(question.getCreator());
             User user = userMapper.selectById(question.getCreator());
             QuestionDTO dto = new QuestionDTO();
             //使用BeanUtils将question的属性拷贝到QuestionDTO
@@ -45,7 +46,6 @@ public class QuestionService {
             dto.setUser(user);
             questionDTOS.add(dto);
         }
-
         paginationDTO.setQuestions(questionDTOS);
         Integer totalCount = questionMapper.count();
         paginationDTO.setPagination(totalCount, page, size);
@@ -85,6 +85,9 @@ public class QuestionService {
 
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.selectById(id);
+        if (question == null) {
+         throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.selectById(question.getCreator());
         questionDTO.setUser(user);
@@ -94,14 +97,16 @@ public class QuestionService {
     //进行插入或更新操作
     public void insertOrUpdate(Question question) {
 
-        if (question.getId()==null){
-            Long id = question.getId();
+        if (question.getId() == null) {
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(System.currentTimeMillis());
             questionMapper.insert(question);
-        }else {
+        } else {
             question.setGmtModified(System.currentTimeMillis());
-            questionMapper.update(question);
+            int i = questionMapper.update(question);
+            if (i!=1){
+                throw new CustomizeException(CustomizeErrorCode.UPDATE_NOT_ALLOWED);
+            }
         }
 
     }

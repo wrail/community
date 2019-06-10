@@ -24,8 +24,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model,
                         @RequestParam(value = "size",defaultValue = "5") Integer size ,
-                        @RequestParam(value = "page",defaultValue = "1") Integer page
-    ) {
+                        @RequestParam(value = "page",defaultValue = "1") Integer page) {
 
         //在返回首页之前将我们所有问题展示,使用QuestionDTO包装,加上分页功能，进化为PaginationDTO
         PaginationDTO pagination = questionService.selectByPage(page,size);
