@@ -9,6 +9,7 @@ import com.wrial.community.model.Comment;
 import com.wrial.community.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CommentService {
@@ -19,6 +20,8 @@ public class CommentService {
     @Autowired
     private QuestionMapper questionMapper;
 
+    //插入一条评论，但是评论分为一级评论和二级评论,并且评论需要多表完成因此要加上事务，防止数据库抖动
+    @Transactional
     public void insert(Comment comment) {
 
         if (comment.getCommentator() == null || comment.getCommentator() == 0) {
@@ -28,10 +31,9 @@ public class CommentService {
             //回复评论，增加评论表的评论数
             Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
             if (dbComment == null) {
-                throw new CustomizeException(CustomizeErrorCode.TYPE_SET_NONE_OR_WRONG);
+                throw new CustomizeException(CustomizeErrorCode.NO_SUCH_COMMENT);
             }
             commentMapper.insert(comment);
-
 
             // 增加评论数
             Comment parentComment = new Comment();
@@ -41,11 +43,10 @@ public class CommentService {
 
         } else {
             //回复问题,就要更新问题表的评论数
-            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
+            Question question = questionMapper.selectById(new Long(comment.getParentId()).intValue());
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.TYPE_SET_NONE_OR_WRONG);
             }
-            commentMapper.insert(comment);
             commentMapper.insert(comment);
             question.setCommentCount(1);
             questionMapper.incCommentCount(question);

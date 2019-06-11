@@ -7,7 +7,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     HAVE_NO_COMMENTATOR(2004, "没有提交者信息"),
     NOT_LOGIN(2005, "没有登陆"),
     TYPE_SET_NONE_OR_WRONG(2006, "评论类型错误"),
-    SYSTEM_ERROR(2007,"服务器冒烟了请稍后再试");
+    SYSTEM_ERROR(2007,"服务器冒烟了请稍后再试"),
+    NO_SUCH_COMMENT(2008,"这个评论跑路了");
 
     private String message;
     private Integer code;
