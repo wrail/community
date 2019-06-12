@@ -1,11 +1,21 @@
 body {
  /*background-image: url("https://dimg02.c-ctrip.com/images/fd/tg/g2/M03/8C/84/CghzgFWw7nWAe_F9ACMX08fvbjk771_R_1600_10000_Mtg_7.jpg");*/
- background-image: url("https://dimg01.c-ctrip.com/images/fd/tg/g1/M00/1C/19/CghzfVWsywyADWSYABUyMyKKvsI939_R_1600_10000_Mtg_7.jpg");
+ /*background-image: url("https://dimg01.c-ctrip.com/images/fd/tg/g1/M00/1C/19/CghzfVWsywyADWSYABUyMyKKvsI939_R_1600_10000_Mtg_7.jpg");*/
+    background-color: #e8e8e8;
+}
+
+.question_border{
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+
 }
 
 .main {
-    /*background-color: honeydew;*/
-    margin: 30px;
+    background-color: #dbdbdb;
+    padding: 25px;
+    margin: 50px;
 }
 .top{
     background: #2aabd2;
@@ -80,6 +90,10 @@ body {
     cursor: pointer;
 }
 
+/*悬浮*/
 .menu .icon:hover {
+    color: #499ef3;
+}
+.menu .comment-icon:hover {
     color: #499ef3;
 }

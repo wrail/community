@@ -1,7 +1,7 @@
 package com.wrial.community.controller;
 
 import com.mysql.cj.util.StringUtils;
-import com.wrial.community.dto.CommentDTO;
+import com.wrial.community.dto.CommentCreateDTO;
 import com.wrial.community.dto.ResultDTO;
 import com.wrial.community.exception.CustomizeErrorCode;
 import com.wrial.community.model.Comment;
@@ -24,23 +24,23 @@ public class CommentController {
 
     @PostMapping("/comment")
     @ResponseBody
-    public ResultDTO post(@RequestBody CommentDTO commentDTO,
+    public ResultDTO post(@RequestBody CommentCreateDTO commentCreateDTO,
                        HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NOT_LOGIN);
         }
-        if (commentDTO == null || StringUtils.isNullOrEmpty(commentDTO.getContent())) {
+        if (commentCreateDTO == null || StringUtils.isNullOrEmpty(commentCreateDTO.getContent())) {
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
         }
         Comment comment = new Comment();
         comment.setCommentator(user.getId());
-        comment.setContent(commentDTO.getContent());
+        comment.setContent(commentCreateDTO.getContent());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setLikeCount(0L);
-        comment.setParentId(commentDTO.getParentId());
-        comment.setType(commentDTO.getType());
+        comment.setParentId(commentCreateDTO.getParentId());
+        comment.setType(commentCreateDTO.getType());
 
         commentService.insert(comment);
 

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class CustomizeExceptionHandle {
                         HttpServletResponse response) {
 
         String contentType = request.getContentType();
-        if (contentType.equals("application/json")) {
+        if (contentType!=null&&contentType.equals("application/json")) {
             //如果是自定义异常（自己抛出的异常）就用JSON格式返回
             ResultDTO resultDTO;
             if (ex instanceof CustomizeException) {

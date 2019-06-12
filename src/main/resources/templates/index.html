@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -14,7 +13,7 @@
 <body>
 <!--抽取公共模块-->
 <div th:replace="~{commons/topBar::topBar}"></div>
-<div class="row">
+<div class="row question_border">
     <!-- 如果是大屏幕9 3 分，中小屏幕水平排列       -->
     <div class="col-lg-9 col-md-12 col-sm-12">
         <h2><span class="glyphicon glyphicon-list" aria-hidden="true">发现</span></h2>

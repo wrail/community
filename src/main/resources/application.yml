@@ -2,7 +2,7 @@
 spring:
  datasource:
   driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/community?serverTimezone=GMT&useSSL=FALSE
+  url: jdbc:mysql://localhost:3306/community?serverTimezone=GMT&useSSL=FALSE&allowPublicKeyRetrieval=true
   username: root
   password: wrial.qq.com
 # 按ctrl + f9
