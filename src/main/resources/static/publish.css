@@ -1,7 +1,10 @@
 body {
- /*background-image: url("https://dimg02.c-ctrip.com/images/fd/tg/g2/M03/8C/84/CghzgFWw7nWAe_F9ACMX08fvbjk771_R_1600_10000_Mtg_7.jpg");*/
- /*background-image: url("https://dimg01.c-ctrip.com/images/fd/tg/g1/M00/1C/19/CghzfVWsywyADWSYABUyMyKKvsI939_R_1600_10000_Mtg_7.jpg");*/
+ /*background-image: url("https://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E6%B8%90%E5%8F%98%E8%89%B2&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=3002181882,1897494838&os=1396208937,2692851310&simid=0,0&pn=10&rn=1&di=76010&ln=1316&fr=&fmq=1560401484986_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&hs=2&objurl=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F16%2F07%2F06%2F15577cad049c7bb.jpg%2521%2Ffwfh%2F804x469%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue&rpstart=0&rpnum=0&adpicid=0&force=undefined ");*/
+ background-image: url("https://dimg01.c-ctrip.com/images/fd/tg/g1/M00/1C/19/CghzfVWsywyADWSYABUyMyKKvsI939_R_1600_10000_Mtg_7.jpg");
     background-color: #e8e8e8;
+    /*background-image: url("/static/background.jpg");*/
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .question_border{

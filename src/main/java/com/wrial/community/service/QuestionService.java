@@ -4,13 +4,18 @@ import com.wrial.community.dto.PaginationDTO;
 import com.wrial.community.dto.QuestionDTO;
 import com.wrial.community.exception.CustomizeErrorCode;
 import com.wrial.community.exception.CustomizeException;
+import com.wrial.community.mapper.CommentMapper;
 import com.wrial.community.mapper.QuestionMapper;
 import com.wrial.community.mapper.UserMapper;
+import com.wrial.community.model.Comment;
 import com.wrial.community.model.Question;
 import com.wrial.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,8 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     //加上分页
     //理一理逻辑，每一个PageDTO里都有一页的记录，并且展示有没有上一页下一页，首页，和尾页
@@ -117,6 +124,31 @@ public class QuestionService {
     //自增阅读数,细节：在更新的时候使用view_count=view_count+1，不要使用Example中的比较并+1
     public void autoIncrViewNum(Integer id) {
         questionMapper.autoIncView(id);
+
+    }
+
+    //删除问题
+    //解决思路：删除问题，并删除所有问题对应的评论,因此得加上事务，并且涉及到二级评论
+    //先删除Question，再删除Comment（一级），根据删除的Comment再删除二级Comment（二级评论规则？）
+    @Transactional
+    public void delQuestion(Integer id) {
+
+        Example example = new Example(Question.class);
+        example.createCriteria().andEqualTo("id", id);
+        questionMapper.deleteByExample(example);
+
+//        Example example2 = new Example(Comment.class);
+//        example2.createCriteria().andEqualTo("parent_id", id);
+//        List<Comment> comments = commentMapper.selectByExample(example2);
+//        if (comments != null) {
+//
+//            for (Comment comment : comments) {
+//                Example example1 = new Example(Comment.class);
+//                example1.createCriteria().andEqualTo("parent_id", comment.getId());
+//                commentMapper.deleteByExample(example1);
+//            }
+//
+//        }
 
     }
 }
