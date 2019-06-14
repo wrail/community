@@ -18,9 +18,9 @@ public class Comment {
 
     private Long gmtModified;
     //点赞
-    private Long likeCount;
+    private Long likeCount = 0L;
     //内容
     private String content;
 
-    private Integer commentCount;
+    private Integer commentCount = 0;
 }

@@ -41,9 +41,10 @@ public class CommentService {
         if (comment.getCommentator() == null || comment.getCommentator() == 0) {
             throw new CustomizeException(CustomizeErrorCode.HAVE_NO_COMMENTATOR);
         }
-        if (comment.getType() == null || !CommentTypeEnum.isExist(comment.getType())) {
+        if (comment.getType() == CommentTypeEnum.COMMENT.getType()) {
             //回复评论，增加评论表的评论数
-            Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
+
+            Comment dbComment = commentMapper.selectById(comment.getParentId());
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.NO_SUCH_COMMENT);
             }
@@ -53,7 +54,7 @@ public class CommentService {
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
-            commentMapper.autoIncCommentCount(comment);
+            commentMapper.autoIncCommentCount(parentComment);
 
         } else {
             //回复问题,就要更新问题表的评论数
@@ -67,12 +68,12 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByTargetId(long id, CommentTypeEnum type) {
+    public List<CommentDTO> listByTargetId(long id, Integer type) {
 
         Example example = new Example(Comment.class);
          example.createCriteria()
                 .andEqualTo("parentId", id)
-                .andEqualTo("type",1);
+                .andEqualTo("type",type);
          //让评论倒叙排序，保证看到的是最新的
          example.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(example);

@@ -29,7 +29,7 @@ public class QuestionController {
     public String question(@PathVariable(name = "id") Integer id,
                            Model model) {
 
-        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION.getType());
         QuestionDTO questionDTO = questionService.getById(id);
         model.addAttribute("question", questionDTO);
         model.addAttribute("comments",comments);

@@ -33,13 +33,12 @@ public class AuthorizeController {
     private String redirect_uri;
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     //没返回说明CallBack失败???,原来是大小写问题
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-//                           HttpServletRequest request,
                            HttpServletResponse response) {
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();

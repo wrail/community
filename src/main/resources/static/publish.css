@@ -77,11 +77,16 @@ body {
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
-
+.sub-comments {
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
 .comment-sp {
     margin-top: 0;
 }
-
 .menu {
     color: #999;
     margin-top: 5px;
@@ -95,6 +100,10 @@ body {
 
 /*悬浮*/
 .menu .icon:hover {
+    color: #499ef3;
+}
+
+.menu .active{
     color: #499ef3;
 }
 .menu .comment-icon:hover {

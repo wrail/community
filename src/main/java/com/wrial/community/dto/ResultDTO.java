@@ -7,10 +7,11 @@ import lombok.Data;
 
 //基于JSON的格式规定
 @Data
-public class ResultDTO {
+public class ResultDTO<T> {
 
     private Integer code;
     private String message;
+    private T data;
 
     //普通传递参数
     public static ResultDTO errorOf(Integer code, String message) {
@@ -31,6 +32,15 @@ public class ResultDTO {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(200);
         resultDTO.setMessage("请求成功");
+        return resultDTO;
+
+    }
+    //请求成功，并返回请求数据（可以是任何类型）
+    public static <T> ResultDTO okOf(T t) {
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("请求成功");
+        resultDTO.setData(t);
         return resultDTO;
 
     }
