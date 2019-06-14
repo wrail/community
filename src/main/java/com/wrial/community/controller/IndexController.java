@@ -1,6 +1,7 @@
 package com.wrial.community.controller;
 
 import com.wrial.community.dto.PaginationDTO;
+import com.wrial.community.dto.QuestionDTO;
 import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -29,6 +32,11 @@ public class IndexController {
         //在返回首页之前将我们所有问题展示,使用QuestionDTO包装,加上分页功能，进化为PaginationDTO
         PaginationDTO pagination = questionService.selectByPage(page,size);
         model.addAttribute("pagination",pagination);
+
+        //前八的热门问题
+        List<QuestionDTO> hotQuestions = questionService.hotQuestion();
+        model.addAttribute("hotQuestions", hotQuestions);
+
         return "index";
     }
 

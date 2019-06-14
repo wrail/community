@@ -40,4 +40,11 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
 
     @Update("update question set comment_count = comment_count + #{commentCount} where id = #{id}")
     void incCommentCount(Question question);
+
+    @Select("select * from question where tag regexp #{regexpTag} and id!=#{id}")
+    List<Question> regexpTags(String regexpTag,Long id);
+
+    @Select("select * from question order by view_count desc limit 0,6")
+    List<Question> getHotQuestions();
+
 }

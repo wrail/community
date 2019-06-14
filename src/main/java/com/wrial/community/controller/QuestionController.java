@@ -30,17 +30,24 @@ public class QuestionController {
                            Model model) {
 
         List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION.getType());
+
         QuestionDTO questionDTO = questionService.getById(id);
+
+        List<QuestionDTO> relateQuestions = questionService.selectRelateQuestion(questionDTO);
+
         model.addAttribute("question", questionDTO);
-        model.addAttribute("comments",comments);
+        model.addAttribute("comments", comments);
+        model.addAttribute("relateQuestions", relateQuestions);
         questionService.autoIncrViewNum(id);
+
 
         return "question";
 
     }
+
     //删除question
     @DeleteMapping("/question/{id}")
-    public String delQuestion(@PathVariable(name = "id") Integer id){
+    public String delQuestion(@PathVariable(name = "id") Integer id) {
 
         questionService.delQuestion(id);
 

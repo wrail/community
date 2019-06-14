@@ -20,17 +20,22 @@
                 <span class="sr-only">Community</span>
 
             </button>
-            <a class="navbar-brand" href="http://localhost:8080/" th:href="@{/}">W-A-Community</a>
+
+
+            <a class="navbar-brand" href="http://localhost:8080/" th:href="@{/}">
+                <span class="glyphicon glyphicon-home" style="font-size: 30px;margin-left:2px" aria-hidden="true">W-Talk</span>
+            </a>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <form class="navbar-form navbar-left" th:action="@{/search}" >
+            <form class="navbar-form navbar-left" th:action="@{/search}">
                 <div class="form-group">
-                    <input type="text" class="form-control" th:name="search" placeholder="搜索你想要的话题">
+                    <input type="text" class="form-control" th:name="search" placeholder="搜索你疑惑的问题">
                 </div>
-                <button type="submit" class="btn btn-default" >Submit</button>
+                <button type="submit" class="btn btn-default">搜索一下</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
 

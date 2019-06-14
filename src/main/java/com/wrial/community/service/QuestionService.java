@@ -14,10 +14,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -117,6 +120,25 @@ public class QuestionService {
 
     }
 
+    //根据解析标签查出相关问题,根据拿出的所有Tag并且用'|'联接，使用正则匹配的模糊查询
+    public List<QuestionDTO> selectRelateQuestion(QuestionDTO queryDTO) {
+
+        String[] split = queryDTO.getTag().split("，");
+        //得到用“|”进行连接的字符串，放到sql中进行正则查询
+        String regexpTag = Arrays.asList(split).stream().collect(Collectors.joining("|"));
+
+        //使用正则判断并且要除过自己所以需要传入自己的Id
+        List<Question> questionList = questionMapper.regexpTags(regexpTag, queryDTO.getId());
+
+        List<QuestionDTO> collect = questionList.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+
+        return collect;
+    }
+
     public Question selectById(Integer id) {
         return questionMapper.selectById(id);
     }
@@ -151,4 +173,20 @@ public class QuestionService {
 //        }
 
     }
+
+    //查找8前八的热门话题
+    public List<QuestionDTO> hotQuestion() {
+
+        List<Question> hotQuestions = questionMapper.getHotQuestions();
+        List<QuestionDTO> collect = hotQuestions.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            User user = userMapper.selectById(q.getCreator());
+            questionDTO.setUser(user);
+            return questionDTO;
+        }).collect(Collectors.toList());
+
+        return collect;
+    }
+
 }

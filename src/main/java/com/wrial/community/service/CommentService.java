@@ -2,6 +2,7 @@ package com.wrial.community.service;
 
 import com.wrial.community.Enums.CommentTypeEnum;
 import com.wrial.community.dto.CommentDTO;
+import com.wrial.community.dto.QuestionDTO;
 import com.wrial.community.exception.CustomizeErrorCode;
 import com.wrial.community.exception.CustomizeException;
 import com.wrial.community.mapper.CommentMapper;
@@ -14,12 +15,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,11 +70,11 @@ public class CommentService {
     public List<CommentDTO> listByTargetId(long id, Integer type) {
 
         Example example = new Example(Comment.class);
-         example.createCriteria()
+        example.createCriteria()
                 .andEqualTo("parentId", id)
-                .andEqualTo("type",type);
-         //让评论倒叙排序，保证看到的是最新的
-         example.setOrderByClause("gmt_create desc");
+                .andEqualTo("type", type);
+        //让评论倒叙排序，保证看到的是最新的
+        example.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(example);
 
         //如果评论为空，就返回空的数组
@@ -89,7 +88,7 @@ public class CommentService {
 
         //根据评论人拿出user，并将user根据id作为key封装到map里
         Example example1 = new Example(User.class);
-         example.createCriteria().andIn("id", userIds);
+        example.createCriteria().andIn("id", userIds);
         List<User> userList = userMapper.selectByExample(example1);
         Map<Long, User> userMap = userList.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
 
@@ -105,4 +104,5 @@ public class CommentService {
 
         return collect;
     }
+
 }
