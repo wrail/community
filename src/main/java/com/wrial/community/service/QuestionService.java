@@ -151,7 +151,7 @@ public class QuestionService {
 
     //删除问题
     //解决思路：删除问题，并删除所有问题对应的评论,因此得加上事务，并且涉及到二级评论
-    //先删除Question，再删除Comment（一级），根据删除的Comment再删除二级Comment（二级评论规则？）
+    //先删除Question，再删除Comment（一级），根据删除的Comment再删除二级Comment
     @Transactional
     public void delQuestion(Integer id) {
 
@@ -159,18 +159,18 @@ public class QuestionService {
         example.createCriteria().andEqualTo("id", id);
         questionMapper.deleteByExample(example);
 
-//        Example example2 = new Example(Comment.class);
-//        example2.createCriteria().andEqualTo("parent_id", id);
-//        List<Comment> comments = commentMapper.selectByExample(example2);
-//        if (comments != null) {
-//
-//            for (Comment comment : comments) {
-//                Example example1 = new Example(Comment.class);
-//                example1.createCriteria().andEqualTo("parent_id", comment.getId());
-//                commentMapper.deleteByExample(example1);
-//            }
-//
-//        }
+        Example example2 = new Example(Comment.class);
+        example2.createCriteria().andEqualTo("parentId", id);
+        List<Comment> comments = commentMapper.selectByExample(example2);
+        commentMapper.deleteByExample(example2);
+        if (comments != null) {
+
+            for (Comment comment : comments) {
+                Example example1 = new Example(Comment.class);
+                example1.createCriteria().andEqualTo("parentId", comment.getId());
+                commentMapper.deleteByExample(example1);
+            }
+        }
 
     }
 

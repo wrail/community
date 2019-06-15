@@ -8,7 +8,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     NOT_LOGIN(2005, "没有登陆"),
     TYPE_SET_NONE_OR_WRONG(2006, "评论类型错误"),
     SYSTEM_ERROR(2007,"服务器冒烟了请稍后再试"),
-    NO_SUCH_COMMENT(2008,"这个评论跑路了");
+    COMMENT_NULL(2008,"评论为空，可能是你写的不规范"),
+    NO_SUCH_COMMENT(2009,"这个评论跑路了");
 
     private String message;
     private Integer code;

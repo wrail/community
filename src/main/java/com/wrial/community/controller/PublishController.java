@@ -1,5 +1,9 @@
 package com.wrial.community.controller;
 
+import com.wrial.community.cahce.TagCache;
+import com.wrial.community.dto.TagDTO;
+import com.wrial.community.exception.CustomizeErrorCode;
+import com.wrial.community.exception.CustomizeException;
 import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.Question;
 import com.wrial.community.model.User;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -35,13 +40,19 @@ public class PublishController {
             model.addAttribute("description", question.getDescription());
             model.addAttribute("tag", question.getTag());
             model.addAttribute("id", id);
+
         }
         return "publish";
     }
 
-    //如果是get就请求页面，如果是post就发布信息
+    /*
+    如果是get就请求页面，如果是post就发布信息
+    在每一个publish都要拿到tags，在get请求的是为了去显示，在post请求的是为了去校验
+    */
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        List<TagDTO> tags = TagCache.getTags();
+        model.addAttribute("tags", tags);
         return "publish";
     }
 
@@ -60,6 +71,12 @@ public class PublishController {
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
 
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            model.addAttribute("info", "用户未登录");
+            return "publish";
+        }
+
         if (title == null || title == "") {
             model.addAttribute("info", "标题不能为空");
             return "publish";
@@ -72,11 +89,15 @@ public class PublishController {
             model.addAttribute("info", "标签不能为空");
             return "publish";
         }
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            model.addAttribute("info", "用户未登录");
+
+        //如果s有值那就说明有非法标签添加错误信息
+        List<TagDTO> tags = TagCache.getTags();
+        String s = TagCache.filterValidTags(tag);
+        if (!s.isEmpty()){
+            model.addAttribute("info", CustomizeErrorCode.COMMENT_NULL.getMessage());
             return "publish";
         }
+
         Question question = new Question();
         question.setTag(tag);
         question.setTitle(title);

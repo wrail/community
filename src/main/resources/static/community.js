@@ -154,16 +154,18 @@ function collapseComments(e) {
     }
 }
 
+//点击输入，显示下拉的标签选择栏
 function showSelectTag() {
     $("#select-tag").show();
 }
 
+//给每个标签加逗号
 function selectTag(e) {
     var value = e.getAttribute("data-tag");
     var previous = $("#tag").val();
     if (previous.indexOf(value) == -1) {
         if (previous) {
-            $("#tag").val(previous + ',' + value);
+            $("#tag").val(previous + '，' + value);
         } else {
             $("#tag").val(value);
         }
