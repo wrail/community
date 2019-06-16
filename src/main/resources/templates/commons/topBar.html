@@ -63,6 +63,7 @@
 
                 <!--  使用GitHub登陆授权,并返回Code-->
                 <li th:if="${session.user==null}">
+<!--                    <a href="https://github.com/login/oauth/authorize?client_id=f7938cf7d59cf3e645eb&redirect_uri=http://47.99.69.136:8080/callback&scope=user&state=1">登陆</a>-->
                     <a href="https://github.com/login/oauth/authorize?client_id=70e24ea8682a92b4239f&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登陆</a>
                 </li>
             </ul>

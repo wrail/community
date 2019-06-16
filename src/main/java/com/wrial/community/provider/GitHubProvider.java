@@ -23,7 +23,6 @@ public class GitHubProvider {
 
         OkHttpClient client = new OkHttpClient();
 
-
         //将AccessTokenDTO转为String传过去
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dto));
         Request request = new Request.Builder()

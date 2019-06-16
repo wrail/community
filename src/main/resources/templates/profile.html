@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/community.js" th:src="@{/community.js}"></script>
+
 
 </head>
 <body>
@@ -29,6 +31,9 @@
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 • <span
                             th:text="${question.viewCount}"></span> 次浏览 • <span
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
+                    <div class="btn-group" role="group">
+                        <button type="button" th:id="${question.getId()}" class="btn btn-danger delQuestion" onclick="deleteQuestion()">删除记录</button>
+                    </div>
                 </div>
             </div>
             <nav aria-label="Page navigation">
@@ -40,7 +45,7 @@
                         </a>
                     </li>
                     <li th:if="${pagination.showPrevious}">
-                        <a  th:href="@{'/profile/'+${section}(page=${pagination.page - 1})}"  aria-label="Previous">
+                        <a th:href="@{'/profile/'+${section}(page=${pagination.page - 1})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
@@ -55,7 +60,7 @@
                         </a>
                     </li>
                     <li th:if="${pagination.showEndPage}">
-                        <a th:href="@{'/profile/'+${section}(page=${pagination.totalPage})}"  aria-label="Previous">
+                        <a th:href="@{'/profile/'+${section}(page=${pagination.totalPage})}" aria-label="Previous">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
@@ -64,8 +69,10 @@
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="list-group section">
-                <a href="/profile/questions" th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
-                <a href="/profile/replies" th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
+                <a href="/profile/questions"
+                   th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
+                <a href="/profile/replies"
+                   th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
                     最新回复
                     <span class="badge">14</span>
                 </a>
