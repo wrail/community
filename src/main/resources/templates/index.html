@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -21,8 +21,8 @@
         <div class="media" th:each="question : ${pagination.questions}">
             <div class="media-left media-middle">
                 <a href="" style="margin-left: 6px">
-                    <img class="img-rounded pic" th:src="${question.getUser().getAvatarUrl()}"
-                         src=" https://avatars2.githubusercontent.com/u/40589410?v=4">
+                    <img class="img-rounded pic" th:if="${question.user.getAvatarUrl()!=null}" th:src="${question.getUser().getAvatarUrl()}"
+                         src="https://avatars2.githubusercontent.com/u/40589410?v=4">
                 </a>
             </div>
             <div class="media-body">

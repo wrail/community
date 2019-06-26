@@ -117,6 +117,8 @@ public class CustomizeException extends RuntimeException {
 
 ![1560486206855](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560486206855.png)
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618102358329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
+
 1. 用户登陆去调用GitHub
 2. GitHub回调Controller中的callback接口，并传一个code和state
 3. 通过client_id，client_secret，code，state获取Access_Token
@@ -165,7 +167,7 @@ Request request = new Request.Builder()
 
 ![1560499585398](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560499585398.png)
 
-
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618102431943.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
 
 #### 问题修改
 
@@ -179,6 +181,8 @@ Request request = new Request.Builder()
 
 ![1560499488259](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560499488259.png)
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618102445555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
+
 ##### 单个问题展示
 
 在主页对所有问题进行展示，用使用分页技术，并渲染时间，浏览数和回复数信息。并且在右边栅格中显示问题的发起人的信息。
@@ -186,9 +190,13 @@ Request request = new Request.Builder()
 
 ![1560498719520](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560498719520.png)
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618103105836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
+
 ##### 我的问题展示
 
 ![1560499535659](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560499535659.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618102516235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
 
 #### 问题删除
 
@@ -230,7 +238,13 @@ Request request = new Request.Builder()
 
 ![1560497831233](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560497831233.png)
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190618102537997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
+
+
+
 ![1560497891703](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1560497891703.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2019061810260212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjA1OTY4,size_16,color_FFFFFF,t_70)
 
 #### 评论点赞
 

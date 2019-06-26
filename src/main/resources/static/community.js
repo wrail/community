@@ -47,17 +47,17 @@ function comment2target(targetId, type, content) {
             "type": type
         }),
         success: function (response) {
-            if (response.code == 200) {
-                window.location.reload();
-            } else {
-                if (response.code == 2005) {
-                    var isAccepted = confirm(response.message);
-                    if (isAccepted) {
-                        // window.open("https://github.com/login/oauth/authorize?client_id=f7938cf7d59cf3e645eb&redirect_uri=http://47.99.69.136:8080/callback&scope=user&state=1");
-                        window.open("https://github.com/login/oauth/authorize?client_id=70e24ea8682a92b4239f&redirect_uri=http://localhost:8080/callback&scope=user&state=1");
-                        window.localStorage.setItem("closable", true);
-                    }
-                } else {
+                    if (response.code == 200) {
+                        window.location.reload();
+                    } else {
+                        if (response.code == 2005) {
+                            var isAccepted = confirm(response.message);
+                            if (isAccepted) {
+                                // window.open("https://github.com/login/oauth/authorize?client_id=f7938cf7d59cf3e645eb&redirect_uri=http://47.99.69.136:8080/callback&scope=user&state=1");
+                                window.open("https://github.com/login/oauth/authorize?client_id=70e24ea8682a92b4239f&redirect_uri=http://localhost:8080/callback&scope=user&state=1");
+                                window.localStorage.setItem("closable", true);
+                            }
+                        } else {
                     alert(response.message);
                 }
             }

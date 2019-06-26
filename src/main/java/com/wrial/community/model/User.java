@@ -14,5 +14,4 @@ public class User {
     //图片地址
     private String avatarUrl;
 
-
 }

@@ -31,9 +31,16 @@
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 • <span
                             th:text="${question.viewCount}"></span> 次浏览 • <span
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
-                    <div class="btn-group" role="group">
-                        <button type="button" th:id="${question.getId()}" class="btn btn-danger delQuestion" onclick="deleteQuestion()">删除记录</button>
+                    <a th:href="@{'/publish/'+${question.id}}" class="community-menu"
+                       th:if="${session.user != null && session.user.id == question.creator}">
+                        <span class="glyphicon btn-default glyphicon-pencil" aria-hidden="true"></span>
+<!--                        编辑-->
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <div class="btn-group " role="group">
+                        <button type="button" th:id="${question.getId()}" class="btn  btn-danger glyphicon glyphicon-remove delQuestion" onclick="deleteQuestion()"></button>
                     </div>
+
                 </div>
             </div>
             <nav aria-label="Page navigation">
