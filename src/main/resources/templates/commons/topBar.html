@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default top" th:fragment="topBar" >
+<nav class="navbar navbar-default top" th:fragment="topBar">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -21,7 +21,8 @@
 
 
             <a class="navbar-brand" href="http://localhost:8080/" th:href="@{/}">
-                <span class="glyphicon glyphicon-home" style="font-size: 30px;margin-left:2px" aria-hidden="true">W-Talk</span>
+                <span class="glyphicon glyphicon-home" style="font-size: 30px;margin-left:2px"
+                      aria-hidden="true">W-Talk</span>
             </a>
 
         </div>
@@ -40,8 +41,19 @@
                 <!-- 如果session中为空，那就去登陆，不为空就不显示登陆-->
                 <!--                <li class="dropdown" th:if="${session.user!=null}">-->
                 <!--   &lt;!&ndash;  <div class="alert alert-success" role="alert" th:text="${session.user.getName()}">已登陆</div>&ndash;&gt;-->
+                <li><a href="/profile/replies">未读消息<span class="badge" th:text="${session.unreadCount}">42</span></a></li>
+                <li>
+                    &nbsp;&nbsp;
+                </li>
+
+                <!--                <button class="btn btn-primary" type="button">-->
+                <!--                    Messages <span class="badge">4</span>-->
+                <!--                </button>-->
                 <li>
                     <a href="/publish" th:href="@{/publish}" th:if="${session.user != null}">发布</a>
+                </li>
+                <li>
+                    &nbsp;&nbsp;
                 </li>
                 <li th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -59,10 +71,16 @@
                     </ul>
                 </li>
 
+                <li>
+                    &nbsp;&nbsp;
+                </li>
                 <!--  使用GitHub登陆授权,并返回Code-->
                 <li th:if="${session.user==null}">
-<!--                    <a href="https://github.com/login/oauth/authorize?client_id=f7938cf7d59cf3e645eb&redirect_uri=http://47.99.69.136:8080/callback&scope=user&state=1">登陆</a>-->
+                    <!--                    <a href="https://github.com/login/oauth/authorize?client_id=f7938cf7d59cf3e645eb&redirect_uri=http://47.99.69.136:8080/callback&scope=user&state=1">登陆</a>-->
                     <a href="https://github.com/login/oauth/authorize?client_id=70e24ea8682a92b4239f&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登陆</a>
+                </li>
+                <li>
+                    &nbsp;&nbsp;
                 </li>
             </ul>
 

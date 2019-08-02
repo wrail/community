@@ -5,6 +5,7 @@ import com.wrial.community.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import tk.mybatis.mapper.annotation.RegisterMapper;
 
 
 @Mapper

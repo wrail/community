@@ -18,7 +18,7 @@
     <div class="col-lg-8 col-md-12 col-sm-12">
         <h2><span class="glyphicon glyphicon-list" aria-hidden="true">发现</span></h2>
 
-        <div class="media" th:each="question : ${pagination.questions}">
+        <div class="media" th:each="question : ${pagination.data}">
             <div class="media-left media-middle">
                 <a href="" style="margin-left: 6px">
                     <img class="img-rounded pic" th:if="${question.user.getAvatarUrl()!=null}" th:src="${question.getUser().getAvatarUrl()}"

@@ -24,6 +24,7 @@ public class GitHubProvider {
         OkHttpClient client = new OkHttpClient();
 
         //将AccessTokenDTO转为String传过去
+//        mediaType, JSON.toJSONString(dto)
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dto));
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
@@ -32,7 +33,7 @@ public class GitHubProvider {
         try (Response response = client.newCall(request).execute()) {
             String s = response.body().string();
 
-            //  System.out.println("Response:" + s);
+              System.out.println("Response:" + s);
             //可以从输出看到返回的信息access_token=857635261a8ca5bad6bec2366c3a26510bcc6200&scope=user&token_type=bearer
             //只需要token的值,并返回
             String token = s.split("&")[0].split("=")[1];

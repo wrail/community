@@ -9,7 +9,9 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     TYPE_SET_NONE_OR_WRONG(2006, "评论类型错误"),
     SYSTEM_ERROR(2007,"服务器冒烟了请稍后再试"),
     COMMENT_NULL(2008,"评论为空，可能是你写的不规范"),
-    NO_SUCH_COMMENT(2009,"这个评论跑路了");
+    NO_SUCH_COMMENT(2009,"这个评论跑路了"),
+    READ_NOTIFICATION_FIAL(2010,"这个可不是你的消息呦"),
+    NOTIFICATION_NOT_FOUND(2011,"为什么找不到这条消息了");
 
     private String message;
     private Integer code;

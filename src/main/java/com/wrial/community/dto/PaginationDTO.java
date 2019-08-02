@@ -7,9 +7,9 @@ import java.util.List;
 
 //利用面向对象思想
 @Data
-public class PaginationDTO {
+public class PaginationDTO<T> {
     //展现所有问题
-    private List<QuestionDTO> questions;
+    private List<T> data;
     //是否有前一个页面
     private boolean showPrevious;
     //是否是第一个页面
@@ -73,7 +73,6 @@ public class PaginationDTO {
         } else {
             showEndPage = true;
         }
-
 
         //此处粗心大意没有加当前页，所以在前台没有当前页码
         pages.add(page);

@@ -42,7 +42,7 @@ public class SearchService {
             dto.setUser(user);
             questionDTOS.add(dto);
         }
-        paginationDTO.setQuestions(questionDTOS);
+        paginationDTO.setData(questionDTOS);
         Integer totalCount = questionMapper.count();
         paginationDTO.setPagination(totalCount, page, size);
 

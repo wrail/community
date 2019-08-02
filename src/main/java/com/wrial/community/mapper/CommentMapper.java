@@ -4,6 +4,7 @@ import com.wrial.community.model.Comment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import tk.mybatis.mapper.annotation.RegisterMapper;
 
 @Mapper
 public interface CommentMapper extends tk.mybatis.mapper.common.Mapper<Comment> {
