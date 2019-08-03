@@ -127,14 +127,16 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
                     <div class="media">
                         <div class="media-left">
+                            <!--需要是session中那头像，而不是从question中，否则会导致多用户身份不一致，
+                            这样的结果就是如果没有登录就会出现异常，因为没有session，因此需要设置一个默认的用户名和头像-->
                             <a href="#">
                                 <img class="media-object img-rounded"
-                                     th:src="${question.user.avatarUrl}">
+                                     th:src="${session.user !=null ? session.user.avatarUrl:'/images/defaultHeadIcon.png'}">
                             </a>
                         </div>
                         <div class="media-body">
                             <h5 class="media-heading">
-                                <span th:text="${question.user.name}"></span>
+                                <span th:text="${session.user!=null ? session.user.name : '未登录用户'}"></span>
                             </h5>
                         </div>
                     </div>

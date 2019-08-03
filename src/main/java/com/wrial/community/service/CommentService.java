@@ -74,7 +74,7 @@ public class CommentService {
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.TYPE_SET_NONE_OR_WRONG);
             }
-            createNotify(comment, receiver, commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
+            createNotify(comment, receiver, commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
 
         } else {
             //回复问题,就要更新问题表的评论数
@@ -86,11 +86,16 @@ public class CommentService {
             question.setCommentCount(1);
             questionMapper.incCommentCount(question);
             //增加回复通知
-            createNotify(comment,question.getCreator(),commentator.getName(), question.getTitle(),NotificationTypeEnum.REPLY_QUESTION,question.getId());
+            createNotify(comment, question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
         }
     }
 
-    private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType,Long outerId) {
+    private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+
+        //如果评论者和接受者是同一个人就不用消息通知了
+        if (comment.getCommentator() == receiver) {
+            return;
+        }
         //增加消息通知
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
