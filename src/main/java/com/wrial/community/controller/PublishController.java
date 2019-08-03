@@ -34,6 +34,10 @@ public class PublishController {
     @GetMapping("/publish/{id}")
     public String editPublish(@PathVariable("id") Integer id,Model model) {
 
+        //在其他页面不经过/publish而直接到/publish/xx时，比如重新编辑时也要把所有标签拿出来
+        List<TagDTO> tags = TagCache.getTags();
+        model.addAttribute("tags", tags);
+
         Question question = questionService.selectById(id);
         if (question != null) {
             model.addAttribute("title", question.getTitle());

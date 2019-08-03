@@ -5,11 +5,21 @@
     padding-bottom: 0px;
     padding-left: 50px;
 }
-
-/*调节标签之间的距离*/
-.question-tag {
-    margin-right: 6px;
+.publish-tag-tab {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
 }
+
+.publish-tag-tab .label-info {
+    white-space: normal;
+    margin: 5px 5px;
+    display: inline-block;
+}
+/*调节标签之间的距离*/
+/*.question-tag {*/
+/*    margin-right: 6px;*/
+/*}*/
 
 .question-related {
     line-height: 20px;

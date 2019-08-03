@@ -8,8 +8,10 @@ import com.wrial.community.mapper.CommentMapper;
 import com.wrial.community.mapper.QuestionMapper;
 import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.Comment;
+import com.wrial.community.model.Notification;
 import com.wrial.community.model.Question;
 import com.wrial.community.model.User;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,14 @@ public class QuestionService {
         if (offset < 0) {
             offset = 0;
         }
-        List<Question> questions = questionMapper.selectPage(offset, size);
+
+        //后写的排在前面
+        Example example = new Example(Question.class);
+        example.setOrderByClause("gmt_create desc");
+        List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+
+
+//        List<Question> questions = questionMapper.selectPage(offset, size);
 //        List<Question> questions = questionMapper.selectAll();
         for (Question question : questions) {
             User user = userMapper.selectById(question.getCreator());

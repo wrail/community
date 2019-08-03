@@ -26,7 +26,7 @@ public class IndexController {
     //在进入index的时候从数据库中取token检查是否存在当前对象
     @GetMapping("/")
     public String index(Model model,
-                        @RequestParam(value = "size",defaultValue = "5") Integer size ,
+                        @RequestParam(value = "size",defaultValue = "6") Integer size ,
                         @RequestParam(value = "page",defaultValue = "1") Integer page) {
 
         //在返回首页之前将我们所有问题展示,使用QuestionDTO包装,加上分页功能，进化为PaginationDTO

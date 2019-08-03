@@ -11,6 +11,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     COMMENT_NULL(2008,"评论为空，可能是你写的不规范"),
     NO_SUCH_COMMENT(2009,"这个评论跑路了"),
     READ_NOTIFICATION_FIAL(2010,"这个可不是你的消息呦"),
+    FILE_UPLOAD_FAIL(2012,"文件上传失败，请稍后再试"),
     NOTIFICATION_NOT_FOUND(2011,"为什么找不到这条消息了");
 
     private String message;
