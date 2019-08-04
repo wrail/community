@@ -20,7 +20,7 @@
             </button>
 
 
-            <a class="navbar-brand" href="http://localhost:8080/" th:href="@{/}">
+            <a class="navbar-brand" href="http://localhost:8080/" th:href="@{/}" style="color: #53dbfc">
                 <span class="glyphicon glyphicon-home" style="font-size: 30px;margin-left:2px"
                       aria-hidden="true">W-Talk</span>
             </a>
@@ -32,16 +32,21 @@
 
             <form class="navbar-form navbar-left" th:action="@{/}">
                 <div class="form-group">
-                    <input type="text" class="form-control" th:name="search" placeholder="搜索你疑惑的问题">
+                    <input type="text" class="form-control" th:name="search" placeholder="一切从搜索开始">
                 </div>
-                <button type="submit" class="btn btn-default">搜索一下</button>
+                <button type="submit" class="btn btn-default">全站搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
 
                 <!-- 如果session中为空，那就去登陆，不为空就不显示登陆-->
                 <!--                <li class="dropdown" th:if="${session.user!=null}">-->
                 <!--   &lt;!&ndash;  <div class="alert alert-success" role="alert" th:text="${session.user.getName()}">已登陆</div>&ndash;&gt;-->
-                <li><a href="/profile/replies">未读消息<span class="badge" th:text="${session.unreadCount}">42</span></a></li>
+                <li>
+
+                        <a href="/profile/replies">未读消息<span class="badge"
+                                                             th:text="${session.unreadCount}">42</span></a>
+
+                </li>
                 <li>
                     &nbsp;&nbsp;
                 </li>

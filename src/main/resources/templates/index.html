@@ -15,7 +15,7 @@
 <div class="row question_border">
     <!-- 如果是大屏幕9 3 分，中小屏幕水平排列       -->
     <div class="col-lg-8 col-md-12 col-sm-12">
-        <h2><span class="glyphicon glyphicon-list" aria-hidden="true" style="color: #8da6ce">问题大厅</span></h2>
+        <h2><span class="glyphicon glyphicon-list" aria-hidden="true" style="color: #bfce16">问题大厅</span></h2>
 
         <div class="media" th:each="question : ${pagination.data}">
             <div class="media-left media-middle">
@@ -70,11 +70,30 @@
     </div>
 
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <h3 style="color: #5d2bad">站长微信</h3>
-            <img th:src="@{/images/indexWeChat.png}" th:height="250px" th:width="350px" >
+
+        <h3 style="color: #00d95a"><span class="glyphicon glyphicon-dashboard">热门标签</span></h3>
+        <div class="media" th:each="hotTag : ${HotTags}">
+            <div class="media-body">
+                <div class="media-left media-middle">
+                    <a href="" style="margin-left: 0px">
+                        <div class="media-left media-middle">
+                            <a href="" style="margin-left: 0px">
+                                <img class="img-rounded hotpic" th:src="@{/images/hotTagHead.png}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <span class="label label-success"><a
+                                        th:href="@{/(page=1,search=${search},tag=${hotTag.getTagName()})}"
+                                        th:text="${hotTag.getTagName()}"></a></span>
+                            </h4>
+                            <span th:text="'标签热度'+${hotTag.getPriority()}"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <h3 style="color: #00d95a">热门话题</h3>
+        <h3 style="color: #00d95a"><span class="glyphicon glyphicon-flag">热门话题</span></h3>
         <div class="media" th:each="question : ${hotQuestions}">
             <div class="media-body">
                 <div class="media-left media-middle">
@@ -87,7 +106,9 @@
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
+                                <a th:href="@{'/question/'+ ${question.id}}" >
+                                    <span class="label label-info" th:text="${question.title}">Info</span>
+                                </a>
                             </h4>
                             <span th:text="${question.user.getName()}"></span>
                             <span th:text="'阅读热量'+${question.viewCount}"></span>
@@ -96,6 +117,11 @@
                 </div>
             </div>
         </div>
+
+<!--        <div class="col-lg-12 col-md-12 col-sm-12">-->
+<!--            <h3 style="color: #5d2bad">站长微信</h3>-->
+<!--            <img th:src="@{/images/indexWeChat.png}" th:height="250px" th:width="350px">-->
+<!--        </div>-->
 
     </div>
 </div>
