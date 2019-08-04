@@ -26,7 +26,7 @@ public class SearchController {
     //根据主题查找问题
     @GetMapping(value = "/search")
     public String Search(@RequestParam(value = "search") String search,
-                         @RequestParam(value = "size",defaultValue = "5") Integer size ,
+                         @RequestParam(value = "size",defaultValue = "7") Integer size ,
                          @RequestParam(value = "page",defaultValue = "1") Integer page,
                          Model model) {
 

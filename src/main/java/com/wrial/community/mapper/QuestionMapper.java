@@ -24,6 +24,9 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
     @Select("select * from question where title like CONCAT('%',#{search},'%') ")
     List<Question> selectByLikeSearch(Integer offset, Integer size, String search);
 
+    @Select("select count(*) from question where title like CONCAT('%',#{search},'%') ")
+    Integer selectBySearchCount(Integer offset, Integer size, String search);
+
     @Select("select count(1) from question")
     Integer count();
 

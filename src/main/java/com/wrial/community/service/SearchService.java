@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+实现search还有一种更好的方案，就是和indexController复用，只需要判断search条件存不存在
+并且不用考虑分页判断问题
+ */
 @Service
 public class SearchService {
 

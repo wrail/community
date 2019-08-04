@@ -8,7 +8,6 @@ import com.wrial.community.mapper.CommentMapper;
 import com.wrial.community.mapper.QuestionMapper;
 import com.wrial.community.mapper.UserMapper;
 import com.wrial.community.model.Comment;
-import com.wrial.community.model.Notification;
 import com.wrial.community.model.Question;
 import com.wrial.community.model.User;
 import org.apache.ibatis.session.RowBounds;
@@ -37,25 +36,35 @@ public class QuestionService {
 
     //加上分页
     //理一理逻辑，每一个PageDTO里都有一页的记录，并且展示有没有上一页下一页，首页，和尾页
-    public PaginationDTO selectByPage(Integer page, Integer size) {
+    //重构代码，在基础上加上查询功能
+    public PaginationDTO selectByPage(String search, Integer page, Integer size) {
 
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
 
-        Integer offset = size * (page - 1);
 
+        Integer offset = size * (page - 1);
         if (offset < 0) {
             offset = 0;
         }
+        //有search的查询
+        if (!StringUtils.isEmpty(search)) {
+            List<Question> questions = questionMapper.selectByLikeSearch(offset, size, search);
+            Integer totalCount = questionMapper.selectBySearchCount(offset, size, search);
+            paginationDTO = packageQuestion(questionDTOS,questions,paginationDTO,page,size,totalCount);
+            return paginationDTO;
+        } else {
+            //后写的排在前面
+            Example example = new Example(Question.class);
+            example.setOrderByClause("gmt_create desc");
+            List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+            Integer totalCount = questionMapper.count();
+            paginationDTO = packageQuestion(questionDTOS,questions,paginationDTO,page,size,totalCount);
+            return paginationDTO;
+        }
+    }
 
-        //后写的排在前面
-        Example example = new Example(Question.class);
-        example.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
-
-
-//        List<Question> questions = questionMapper.selectPage(offset, size);
-//        List<Question> questions = questionMapper.selectAll();
+    private PaginationDTO packageQuestion(List<QuestionDTO> questionDTOS, List<Question> questions,PaginationDTO<QuestionDTO> paginationDTO,Integer page,Integer size,Integer totalCount) {
         for (Question question : questions) {
             User user = userMapper.selectById(question.getCreator());
             QuestionDTO dto = new QuestionDTO();
@@ -64,10 +73,9 @@ public class QuestionService {
             dto.setUser(user);
             questionDTOS.add(dto);
         }
+        // List<Question> questions = questionMapper.selectPage(offset, size);
         paginationDTO.setData(questionDTOS);
-        Integer totalCount = questionMapper.count();
         paginationDTO.setPagination(totalCount, page, size);
-
         return paginationDTO;
     }
 
