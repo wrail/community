@@ -47,6 +47,8 @@ public class IndexController {
         //因此，必须将此保存起来，直到下一次下一次到“/”首页的时候search才会被刷新为null
         model.addAttribute("search", search);
 
+        model.addAttribute("tag", tag);
+
         //在返回首页之前将我们所有问题展示,使用QuestionDTO包装,加上分页功能，进化为PaginationDTO
         PaginationDTO pagination = questionService.selectByPage(search,tag, page, size);
         model.addAttribute("pagination", pagination);

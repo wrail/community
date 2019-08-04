@@ -21,6 +21,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,9 +40,7 @@ public class QuestionService {
     //重构代码，在基础上加上查询功能
     public PaginationDTO selectByPage(String search, String tag, Integer page, Integer size) {
 
-        List<QuestionDTO> questionDTOS = new ArrayList<>();
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
-
 
         Integer offset = size * (page - 1);
         if (offset < 0) {
@@ -50,22 +49,32 @@ public class QuestionService {
         //有search的查询
         if (!StringUtils.isEmpty(search)) {
             if (!StringUtils.isEmpty(tag)) {
-                List<Question> questions = questionMapper.selectByLikeSearchAndTag(offset, size, search, tag);
-                Integer totalCount = questionMapper.selectBySearchAndTagCount(offset, size, search, tag);
-                paginationDTO = packageQuestion(questionDTOS, questions, paginationDTO, page, size, totalCount);
+                Example example = new Example(Question.class);
+                example.createCriteria().andLike("tag", tag).andLike("title","%"+search+"%");
+                example.setOrderByClause("gmt_create desc");
+                List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+                Example example1 = new Example(Question.class);
+                example.createCriteria().andLike("tag", tag).andLike("title","%"+search+"%");;
+                int totalCount = questionMapper.selectCountByExample(example);
+                paginationDTO = packageQuestion(questions, paginationDTO, page, size, totalCount);
                 return paginationDTO;
 
             } else {
                 List<Question> questions = questionMapper.selectByLikeSearch(offset, size, search);
                 Integer totalCount = questionMapper.selectBySearchCount(offset, size, search);
-                paginationDTO = packageQuestion(questionDTOS, questions, paginationDTO, page, size, totalCount);
+                paginationDTO = packageQuestion(questions, paginationDTO, page, size, totalCount);
                 return paginationDTO;
             }
         } else {
             if (!StringUtils.isEmpty(tag)) {
-                List<Question> questions = questionMapper.selectByLikeSearchAndTag(offset, size, search, tag);
-                Integer totalCount = questionMapper.selectBySearchAndTagCount(offset, size, search, tag);
-                paginationDTO = packageQuestion(questionDTOS, questions, paginationDTO, page, size, totalCount);
+                Example example = new Example(Question.class);
+                example.createCriteria().andLike("tag", tag);
+                example.setOrderByClause("gmt_create desc");
+                List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
+                Example example1 = new Example(Question.class);
+                example.createCriteria().andLike("tag", tag);
+                int totalCount = questionMapper.selectCountByExample(example);
+                paginationDTO = packageQuestion(questions, paginationDTO, page, size, totalCount);
                 return paginationDTO;
 
             } else {
@@ -74,13 +83,14 @@ public class QuestionService {
                 example.setOrderByClause("gmt_create desc");
                 List<Question> questions = questionMapper.selectByExampleAndRowBounds(example, new RowBounds(offset, size));
                 Integer totalCount = questionMapper.count();
-                paginationDTO = packageQuestion(questionDTOS, questions, paginationDTO, page, size, totalCount);
+                paginationDTO = packageQuestion(questions, paginationDTO, page, size, totalCount);
                 return paginationDTO;
             }
         }
     }
 
-    private PaginationDTO packageQuestion(List<QuestionDTO> questionDTOS, List<Question> questions, PaginationDTO<QuestionDTO> paginationDTO, Integer page, Integer size, Integer totalCount) {
+    private PaginationDTO packageQuestion(List<Question> questions, PaginationDTO<QuestionDTO> paginationDTO, Integer page, Integer size, Integer totalCount) {
+        List<QuestionDTO> questionDTOS = new ArrayList<QuestionDTO>();
         for (Question question : questions) {
             User user = userMapper.selectById(question.getCreator());
             QuestionDTO dto = new QuestionDTO();

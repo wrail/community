@@ -16,21 +16,12 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
     @Select("select * from question where id = #{id}")
     Question selectById(@Param("id") Integer id);
 
-
-
-//    limit #{offset},#{size}
+    //    limit #{offset},#{size}
     @Select("select * from question where title like CONCAT('%',#{search},'%') ")
     List<Question> selectByLikeSearch(Integer offset, Integer size, String search);
 
-    @Select("select * from question where title like CONCAT('%',#{search},'%') and tag like #{tag}")
-    List<Question> selectByLikeSearchAndTag(Integer offset, Integer size, String search, String tag);
-
-
     @Select("select count(*) from question where title like CONCAT('%',#{search},'%') ")
     Integer selectBySearchCount(Integer offset, Integer size, String search);
-
-    @Select("select count(*) from question where title like CONCAT('%',#{search},'%') and tag like #{tag}")
-    Integer selectBySearchAndTagCount(Integer offset, Integer size, String search, String tag);
 
 
     @Select("select count(1) from question")
@@ -52,7 +43,7 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
     void incCommentCount(Question question);
 
     @Select("select * from question where tag regexp #{regexpTag} and id!=#{id}")
-    List<Question> regexpTags(String regexpTag,Long id);
+    List<Question> regexpTags(String regexpTag, Long id);
 
     @Select("select * from question order by view_count desc limit 0,5")
     List<Question> getHotQuestions();
