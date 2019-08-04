@@ -48,7 +48,7 @@ public interface QuestionMapper extends tk.mybatis.mapper.common.Mapper<Question
     @Select("select * from question where tag regexp #{regexpTag} and id!=#{id}")
     List<Question> regexpTags(String regexpTag,Long id);
 
-    @Select("select * from question order by view_count desc limit 0,6")
+    @Select("select * from question order by view_count desc limit 0,5")
     List<Question> getHotQuestions();
 
 }

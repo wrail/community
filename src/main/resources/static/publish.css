@@ -77,8 +77,9 @@ a:link, a:visited {
     height: 38px;
 }
 
+/*调整热门话题间距*/
 .media-body {
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 .text-desc {

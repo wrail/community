@@ -191,7 +191,7 @@ public class QuestionService {
 
     }
 
-    //查找8前八的热门话题
+    //查找前五的热门话题
     public List<QuestionDTO> hotQuestion() {
 
         List<Question> hotQuestions = questionMapper.getHotQuestions();

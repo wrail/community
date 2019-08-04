@@ -15,7 +15,7 @@
 <div class="row question_border">
     <!-- 如果是大屏幕9 3 分，中小屏幕水平排列       -->
     <div class="col-lg-8 col-md-12 col-sm-12">
-        <h2><span class="glyphicon glyphicon-list" aria-hidden="true">发现</span></h2>
+        <h2><span class="glyphicon glyphicon-list" aria-hidden="true" style="color: #8da6ce">问题大厅</span></h2>
 
         <div class="media" th:each="question : ${pagination.data}">
             <div class="media-left media-middle">
@@ -34,7 +34,7 @@
                         th:text="${question.viewCount}"></span> 次浏览 • <span
                         th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
             </div>
-            <br>
+            <br th:width="0px">
         </div>
         <nav aria-label="Page navigation">
             <ul class="pagination">
@@ -70,13 +70,17 @@
     </div>
 
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <h3>热门话题</h3>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h3 style="color: #5d2bad">站长微信</h3>
+            <img th:src="@{/images/indexWeChat.png}" th:height="250px" th:width="350px" >
+        </div>
+        <h3 style="color: #00d95a">热门话题</h3>
         <div class="media" th:each="question : ${hotQuestions}">
             <div class="media-body">
                 <div class="media-left media-middle">
                     <a href="" style="margin-left: 0px">
                         <div class="media-left media-middle">
-                            <a href="" style="margin-left: 6px">
+                            <a href="" style="margin-left: 0px">
                                 <img class="img-rounded hotpic" th:src="${question.getUser().getAvatarUrl()}"
                                      src=" https://avatars2.githubusercontent.com/u/40589410?v=4">
                             </a>
@@ -95,6 +99,6 @@
 
     </div>
 </div>
-
+<div th:replace="~{commons/footer::foot}"></div>
 </body>
 </html>

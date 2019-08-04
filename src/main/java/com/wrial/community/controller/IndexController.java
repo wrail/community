@@ -28,7 +28,7 @@ public class IndexController {
     //对代码进行重构，将search和index合并
     @GetMapping("/")
     public String index(Model model,
-                        @RequestParam(value = "size", defaultValue = "6") Integer size,
+                        @RequestParam(value = "size", defaultValue = "7") Integer size,
                         @RequestParam(value = "page", defaultValue = "1") Integer page,
                         @RequestParam(value = "search", required = false) String search) {
 
@@ -41,7 +41,7 @@ public class IndexController {
         PaginationDTO pagination = questionService.selectByPage(search, page, size);
         model.addAttribute("pagination", pagination);
 
-        //前八的热门问题
+        //前五的热门问题
         List<QuestionDTO> hotQuestions = questionService.hotQuestion();
         model.addAttribute("hotQuestions", hotQuestions);
 
