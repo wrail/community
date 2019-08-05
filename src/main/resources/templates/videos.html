@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/publish.css" th:href="@{/publish.css}">
+    <link rel="stylesheet" href="../static/css/editormd.preview.min.css" th:href="@{/css/editormd.preview.min.css}">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/community.js" th:src="@{/community.js}"></script>
+    <script src="../static/moment.js" th:src="@{/moment.js}"></script>
+
+
+</head>
+<body>
+<div th:replace="~{commons/topBar::topBar}"></div>
+<div class="row">
+
+    <div class="col-md-4 col-md-12 col-sm-12 col-xs-12 videos">
+        <h2>Java从编程语言到变成思想</h2>
+        <img src="http://img2.mukewang.com/5d36f8c6082807ae06000338-240-135.jpg" style="width: 80%">
+        <p><a class="btn btn-default" href="https://www.imooc.com/learn/1154" role="button">去学习  » </a></p>
+    </div>
+    <div class="col-md-4 col-md-12 col-sm-12 col-xs-12 videos">
+        <h2>Debug系列</h2>
+        <img src="http://i0.hdslb.com/bfs/archive/afa2fe75c9dd9997093a180dfff063ed47852b78.jpg" style="width: 80%">
+        <p><a class="btn btn-default" href="https://www.bilibili.com/video/av58830270" role="button">去学习  »</a></p>
+    </div>
+    <div class="col-md-4 col-md-12 col-sm-12 col-xs-12 videos">
+        <h2>Kafka流处理平台</h2>
+        <img src="https://img3.mukewang.com/5b8ce427000121b406000338-240-135.jpg" style="width: 80%">
+        <p><a class="btn btn-default" href="https://www.imooc.com/learn/1043" role="button">去学习  »</a></p>
+    </div>
+    <div class="col-md-4 col-md-12 col-sm-12 col-xs-12 videos">
+        <h2>Spring Boot2.x 深度实践</h2>
+        <img src="http://img2.mukewang.com/5bbafd180001688d06000338-240-135.jpg" style="width: 80%">
+        <p><a class="btn btn-default" href="https://www.imooc.com/learn/1058" role="button">去学习  »</a></p>
+    </div>
+</div>
+
+
+<div th:replace="~{commons/footer::foot}"></div>
+</body>
+</html>

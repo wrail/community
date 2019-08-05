@@ -156,6 +156,11 @@ a:link, a:visited {
 }
 
 body {
-    background-color: #efefef;
+    background-color: #efeded;
+}
+
+.videos{
+    padding: 20px;
+    height: 100%;
 }
 
